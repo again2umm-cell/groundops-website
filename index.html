@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GroundOps Pvt Ltd — Landing</title>
+  <meta name="description" content="GroundOps — reservations, dispatch & back-office for ground transportation operators." />
+
+  <style>
+    /* ========== Base ========== */
+    :root{
+      --header-h:72px;
+      --max-w:1200px;
+      --radius:16px;
+      --muted:#6b7280;
+      --card-bg:#fff;
+      --border:#e6e9ee;
+      --accent:#111827;
+      --glass: rgba(255,255,255,0.9);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--accent);
+      background: linear-gradient(180deg,#f8fafc 0%, #fff 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding-top:var(--header-h);
+      line-height:1.45;
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    /* ========== Header ========== */
+    header.site-header{
+      height:var(--header-h);
+      position:fixed;
+      left:0; right:0; top:0;
+      background:var(--glass);
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      z-index:60;
+      backdrop-filter: blur(6px);
+    }
+    .container{max-width:var(--max-w); margin:0 auto; padding:0 20px; width:100%}
+    .header-row{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .brand{display:flex; gap:10px; align-items:center}
+    .brand img{height:36px; width:auto}
+    .brand .name{font-weight:700}
+    nav.header-nav{display:flex; gap:18px; align-items:center; font-size:0.95rem}
+    nav.header-nav button, nav.header-nav a{background:none; border:none; cursor:pointer; color:var(--accent); padding:6px 8px}
+    .cta-btn{
+      background:#fff; border:1px solid var(--border); padding:8px 14px; border-radius:999px; cursor:pointer;
+      box-shadow: 0 1px 0 rgba(16,24,40,0.03);
+    }
+
+    /* ========== Banner Carousel ========== */
+    .carousel{
+      position:relative;
+      height:480px;
+      overflow:hidden;
+    }
+    .carousel .slide{
+      position:absolute; inset:0; opacity:0; transition:opacity .7s ease;
+      background-size:cover; background-position:center;
+    }
+    .carousel .slide.active{opacity:1}
+    .carousel .overlay{
+      position:absolute; inset:0; background:rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center;
+    }
+    .carousel .overlay .inner{color:#fff; text-align:center; max-width:1000px; padding:0 20px}
+    .carousel h2{font-size:32px; margin:0; font-weight:800}
+    .carousel p{margin-top:8px; color:rgba(255,255,255,0.9)}
+
+    .carousel .arrow{
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(0,0,0,0.35); color:#fff; border:none; width:40px; height:40px; border-radius:999px; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .carousel .arrow:hover{background:rgba(0,0,0,0.5)}
+    .carousel .arrow.left{left:14px}
+    .carousel .arrow.right{right:14px}
+
+    .carousel .dots{
+      position:absolute; bottom:18px; left:50%; transform:translateX(-50%);
+      display:flex; gap:8px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.6); border:0; cursor:pointer;
+    }
+    .dot.active{background:#fff}
+
+    /* ========== Main ========== */
+    main{max-width:var(--max-w); margin:0 auto; padding:36px 20px 80px}
+    section.hero{ text-align:center; max-width:900px; margin:0 auto 20px}
+    h1{font-size:36px; margin:0; line-height:1.05}
+    p.lead{margin-top:16px; color:var(--muted); font-size:1.05rem}
+
+    /* ========== Grid + Cards ========== */
+    .grid{display:grid; gap:18px}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .card{
+      background:var(--card-bg); border:1px solid var(--border); padding:16px; border-radius:var(--radius);
+      box-shadow: 0 6px 18px rgba(15,23,42,0.03);
+    }
+    .card h3{margin:0; font-size:1.05rem}
+    .card .muted{color:var(--muted); font-size:0.94rem; margin-top:6px}
+
+    .badges{display:flex; flex-wrap:wrap; gap:8px}
+    .badge{background:rgba(255,255,255,0.7); padding:6px 10px; border-radius:999px; border:1px solid var(--border); font-size:0.9rem}
+
+    /* Logos area */
+    .logos{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+    .logo-box{border:1px solid var(--border); border-radius:12px; padding:12px; text-align:center; font-size:0.95rem}
+
+    /* Pricing */
+    .pricing{display:grid; gap:12px}
+    .pricing .card{text-align:center}
+
+    /* Testimonials */
+    .testimonials{display:grid; gap:12px}
+
+    /* Contact area */
+    .contact-grid{display:grid; gap:18px}
+    .contact-grid.cols-2{grid-template-columns:1fr 420px}
+    .contact-grid input, .contact-grid textarea{
+      width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--border);
+      font-size:0.95rem;
+    }
+    .full-btn{display:inline-block; width:100%; padding:10px 12px; border-radius:8px; background:#111827; color:#fff; border:0; cursor:pointer; font-weight:600}
+
+    /* FAQ */
+    .faq-grid{display:grid; gap:12px}
+
+    /* Footer */
+    footer.site-footer{border-top:1px solid var(--border); background:#fff; padding:28px 0 36px; color:var(--muted)}
+    .footer-grid{display:grid; grid-template-columns:1fr 160px 160px; gap:18px; max-width:var(--max-w); margin:0 auto; padding:0 20px}
+    .copyright{ text-align:center; font-size:12px; color:var(--muted); padding-top:10px }
+
+    /* ========== Utilities ========== */
+    .small{font-size:0.88rem}
+    .muted-sm{color:var(--muted); font-size:0.95rem}
+
+    /* ========== Responsive ========== */
+    @media (max-width:900px){
+      .grid.cols-2{grid-template-columns:1fr}
+      .grid.cols-3{grid-template-columns:1fr}
+      .logos{grid-template-columns:repeat(2,1fr)}
+      .contact-grid.cols-2{grid-template-columns:1fr}
+      .header-row{gap:8px}
+      nav.header-nav{display:none}
+      .brand .name{display:none}
+      .carousel{height:360px}
+      h1{font-size:28px}
+      .carousel h2{font-size:28px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="header-row">
+        <div class="brand">
+          <img src="groundops-logo.png" alt="GroundOps logo" />
+        </div>
+
+        <nav class="header-nav" aria-label="Primary">
+          <button data-to="services">Services</button>
+          <button data-to="santacruz">SantaCruz</button>
+          <button data-to="whyus">Why Us</button>
+          <button data-to="pricing">Pricing</button>
+          <button class="cta-btn">Schedule a Demo</button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- BANNER / CAROUSEL -->
+  <div class="carousel" id="banner-carousel" aria-roledescription="carousel">
+    <!-- slides: change src/background-image paths to your images -->
+    <div class="slide active" style="background-image:url('banner1.jpg');" role="group" aria-roledescription="slide" aria-label="1 of 3"></div>
+    <div class="slide" style="background-image:url('banner2.jpg');" role="group" aria-roledescription="slide" aria-label="2 of 3"></div>
+    <div class="slide active" style="background-image:url('banner3.jpg');" role="group" aria-roledescription="slide" aria-label="3 of 3"></div>
+
+    <div class="overlay" aria-hidden="false">
+      <div class="inner">
+        <h2>Professional 24×7 Support</h2>
+        <p>Trusted back-office support for ground transportation operators.</p>
+      </div>
+    </div>
+
+    <button class="arrow left" aria-label="Previous slide">‹</button>
+    <button class="arrow right" aria-label="Next slide">›</button>
+
+    <div class="dots" role="tablist" aria-label="Slides">
+      <button class="dot active" aria-label="Go to slide 1"></button>
+      <button class="dot" aria-label="Go to slide 2"></button>
+      <button class="dot" aria-label="Go to slide 3"></button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Seamless Support for Ground Transportation Operations</h1>
+      <p class="lead">We handle your reservations, dispatch, and billing — so you can focus on delivering a great service.</p>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="grid cols-2" aria-labelledby="services-heading" style="margin-top:18px">
+      <div>
+        <div class="card">
+          <h3>Reservations Coordinator</h3>
+          <div class="muted">Manage incoming bookings via phone, email & web.</div>
+          <ul style="margin-top:12px;">
+            <li>• 24/7 live agent support</li>
+            <li>• VIP handling</li>
+            <li>• Multi-platform management</li>
+            <li>• Affiliate coordination</li>
+          </ul>
+          <div style="margin-top:12px"><button class="full-btn" style="width:auto;padding:8px 12px;border-radius:999px">Add to Quote</button></div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h3>Dispatch Coordinator</h3>
+          <div class="muted">Real-time trip oversight and alerts.</div>
+          <ul style="margin-top:12px;">
+            <li>• Live monitoring & OTP</li>
+            <li>• Exception handling</li>
+            <li>• Partner comms</li>
+            <li>• Data hygiene</li>
+          </ul>
+          <div style="margin-top:12px"><button class="full-btn" style="width:auto;padding:8px 12px;border-radius:999px">Add to Quote</button></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>After-Hours Desk</h3>
+          <div class="muted">Cross-trained coverage for low-volume overnight support.</div>
+          <ul style="margin-top:12px;">
+            <li>• Cross-trained</li>
+            <li>• Escalation playbooks</li>
+            <li>• SLA windows</li>
+            <li>• Handoff to day team</li>
+          </ul>
+          <div style="margin-top:12px"><button class="full-btn" style="width:auto;padding:8px 12px;border-radius:999px">Add to Quote</button></div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h3>Accounting & Billing</h3>
+          <div class="muted">Invoice generation, disputes, and settlements.</div>
+          <ul style="margin-top:12px;">
+            <li>• Invoice creation</li>
+            <li>• Dispute resolution</li>
+            <li>• Payment follow-up</li>
+            <li>• Month-end reports</li>
+          </ul>
+          <div style="margin-top:12px"><button class="full-btn" style="width:auto;padding:8px 12px;border-radius:999px">Add to Quote</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BADGES -->
+    <section style="margin-top:18px">
+      <div class="badges">
+        <div class="badge">24×7 / US Timezones</div>
+        <div class="badge">Security & Compliance</div>
+        <div class="badge">Experienced Agents</div>
+        <div class="badge">SantaCruz</div>
+        <div class="badge">Limo Labs</div>
+        <div class="badge">Livery Coach</div>
+        <div class="badge">SLA-Driven Ops</div>
+        <div class="badge">Remote Agents</div>
+        <div class="badge">25+ Clients</div>
+      </div>
+    </section>
+
+    <!-- TRUSTED LOGOS -->
+    <section style="margin-top:18px" class="card">
+      <div class="small muted-sm">Trusted by operators & affiliates</div>
+      <div class="logos" style="margin-top:12px">
+        <div class="logo-box">Enterprise Operator</div>
+        <div class="logo-box">Regional Shuttle</div>
+        <div class="logo-box">Corporate Travel Desk</div>
+        <div class="logo-box">Hotel & DMC</div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" style="margin-top:18px" class="grid cols-3">
+      <div class="card">
+        <h3>After-Hours Desk</h3>
+        <ul style="margin-top:10px;">
+          <li>• Inbound calls & emails</li>
+          <li>• 20–60 hrs/week</li>
+        </ul>
+        <div style="margin-top:12px"><button class="full-btn">Get a Quote</button></div>
+      </div>
+      <div class="card">
+        <h3>24×7 Coverage</h3>
+        <ul style="margin-top:10px;">
+          <li>• Reservations + Dispatch</li>
+          <li>• 160–320 hrs/week</li>
+        </ul>
+        <div style="margin-top:12px"><button class="full-btn">Get a Quote</button></div>
+      </div>
+      <div class="card">
+        <h3>Back Office</h3>
+        <ul style="margin-top:10px;">
+          <li>• Invoicing & settlements</li>
+          <li>• Month-end support</li>
+        </ul>
+        <div style="margin-top:12px"><button class="full-btn">Get a Quote</button></div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section style="margin-top:18px" class="testimonials grid cols-3">
+      <div class="card">
+        <blockquote style="font-style:italic; color:#374151">“They took over after-hours seamlessly. Missed calls dropped dramatically.”</blockquote>
+        <p class="muted-sm" style="margin-top:10px">— Owner, 40-vehicle operator</p>
+      </div>
+      <div class="card">
+        <blockquote style="font-style:italic; color:#374151">“Dispatch monitors are proactive — flight delays flagged earlier.”</blockquote>
+        <p class="muted-sm" style="margin-top:10px">— Dispatch Manager, Shuttle</p>
+      </div>
+      <div class="card">
+        <blockquote style="font-style:italic; color:#374151">“Billing clean-up reduced disputes and cycles.”</blockquote>
+        <p class="muted-sm" style="margin-top:10px">— Finance Lead</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" style="margin-top:18px" class="contact-grid cols-2">
+      <div>
+        <h3 style="margin:0">Talk to our team</h3>
+        <p class="muted-sm" style="margin-top:8px">We’ll tailor a coverage plan and quote for your fleet size and markets.</p>
+        <ul style="margin-top:12px; color:var(--muted)">
+          <li>📞 1-800-XXX-XXXX (Toll-free US)</li>
+          <li>✉️ hello@groundopsltd.com</li>
+          <li>🏢 Ahmedabad, India · Serving USA</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 style="margin:0">Quick contact</h3>
+        <div class="muted-sm" style="margin-top:4px">We’ll get back within 1 business day.</div>
+        <div style="margin-top:12px; display:grid; gap:8px">
+          <input type="text" placeholder="Your Name" />
+          <input type="email" placeholder="Work Email" />
+          <input type="text" placeholder="Company" />
+          <textarea rows="4" placeholder="How can we help?"></textarea>
+          <button class="full-btn">Send</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-top:18px" class="faq-grid">
+      <div class="card">
+        <h3 style="margin:0">Do you offer 24/7 support?</h3>
+        <div class="muted-sm" style="margin-top:6px">Yes — round-the-clock service every day.</div>
+      </div>
+      <div class="card">
+        <h3 style="margin:0">Can you integrate with our systems?</h3>
+        <div class="muted-sm" style="margin-top:6px">Absolutely — we work with popular dispatch & booking tools.</div>
+      </div>
+      <div class="card">
+        <h3 style="margin:0">Will agents speak in our brand name?</h3>
+        <div class="muted-sm" style="margin-top:6px">Yes — fully white-labeled support available.</div>
+      </div>
+      <div class="card">
+        <h3 style="margin:0">How quickly can we start?</h3>
+        <div class="muted-sm" style="margin-top:6px">Typically 1–2 weeks depending on systems and training.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <img src="groundops-logo.png" alt="logo" style="height:36px" />
+        </div>
+        <p class="muted-sm">India-based BPO for US ground transportation companies. Reservations, dispatch monitoring, and accounting—built on SantaCruz.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button data-to="services">Services</button>
+        <button data-to="santacruz">SantaCruz</button>
+        <button data-to="pricing">Pricing</button>
+        <button data-to="contact">Contact</button>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Data Processing Addendum</a>
+        <a href="#">Security Brief</a>
+        <a href="#">Careers</a>
+      </div>
+    </div>
+
+    <div class="copyright">© <span id="year"></span> GroundOps Pvt Ltd. All rights reserved.</div>
+  </footer>
+
+  <script>
+    /* ========== Carousel Behavior ========== */
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.carousel .slide'));
+      const dots = Array.from(document.querySelectorAll('.carousel .dot'));
+      const left = document.querySelector('.carousel .arrow.left');
+      const right = document.querySelector('.carousel .arrow.right');
+      let idx = 0;
+      let paused = false;
+      const intervalMs = 4500;
+      function go(i){
+        idx = (i + slides.length) % slides.length;
+        slides.forEach((s, k)=> s.classList.toggle('active', k === idx));
+        dots.forEach((d, k)=> d.classList.toggle('active', k === idx));
+      }
+      right.addEventListener('click', ()=> go(idx+1));
+      left.addEventListener('click', ()=> go(idx-1));
+      dots.forEach((d, i)=> d.addEventListener('click', ()=> go(i)));
+
+      // autoplay
+      let t = setInterval(()=> { if(!paused) go(idx+1); }, intervalMs);
+      const carousel = document.getElementById('banner-carousel');
+      carousel.addEventListener('mouseenter', ()=> paused = true);
+      carousel.addEventListener('mouseleave', ()=> paused = false);
+      // clean up on unload
+      window.addEventListener('beforeunload', ()=> clearInterval(t));
+    })();
+
+    /* ========== Smooth scroll for nav buttons ========== */
+    (function(){
+      function scrollToId(id){
+        const el = document.getElementById(id);
+        if(!el) return;
+        const y = el.getBoundingClientRect().top + window.pageYOffset - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h') || 72);
+        window.scrollTo({top: y, behavior:'smooth'});
+      }
+      document.querySelectorAll('[data-to]').forEach(btn=>{
+        btn.addEventListener('click', ()=> scrollToId(btn.getAttribute('data-to')));
+      });
+      // footer buttons use data-to too
+      document.querySelectorAll('button[data-to]').forEach(b=>{
+        b.addEventListener('click', (e)=> {
+          e.preventDefault();
+          scrollToId(b.getAttribute('data-to'));
+        });
+      });
+      // set year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
